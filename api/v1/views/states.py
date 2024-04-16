@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 """task 7: new view for 'State' that handles default 'RESTFul API' actions"""
 
+
 from api.v1.views import app_views
-from flask import Flask, abort, request, jsonify
+from flask import abort, request, jsonify
 from models import storage
 from models.state import State
 
 
-app = Flask(__name__)
-
-
-@app.route('/api/v1/states', methods=['POST'])
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     """creates 'State'"""
     if not request.json:
@@ -22,15 +20,15 @@ def create_state():
     return jsonify(state.to_dict()), 201
 
 
-@app.route('/api/v1/states', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def list_states():
     """gets list of all 'State' objects"""
     states = storage.all(State)
-    states_list = [state.to_dict() for state in states.values()]
-    return jsonify(states_list)
+    states_listing = [state.to_dict() for state in states.values()]
+    return jsonify(states_listing)
 
 
-@app.route('/api/v1/states/<state_id>', methods=['GET'])
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """gets 'State' object"""
     state = storage.get(State, state_id)
@@ -39,7 +37,7 @@ def get_state(state_id):
     return jsonify(state.to_dict())
 
 
-@app.route('/api/v1/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """updates 'State' object"""
     state = storage.get(State, state_id)
@@ -54,7 +52,8 @@ def update_state(state_id):
     return jsonify(state.to_dict()), 200
 
 
-@app.route('/api/v1/states/<state_id>', methods=['DELETE'])
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state(state_id):
     """deletes 'State' object"""
     state = storage.get(State, state_id)
