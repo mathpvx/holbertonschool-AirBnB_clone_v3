@@ -2,12 +2,12 @@
 """task 13: new view for 'Place' objects handles default RESTFul API actions"""
 
 
-from models import storage
-from models.place import Place
-from models.city import City
-from flask import Flask, jsonify, abort, request
-from models.user import User
 from api.v1.views import app_views
+from flask import abort, jsonify, request
+from models import storage
+from models.city import City
+from models.place import Place
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places',
