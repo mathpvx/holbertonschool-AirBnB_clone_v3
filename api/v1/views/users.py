@@ -1,4 +1,7 @@
 #!/bin/usr/python3
+"""task 10: view 'User' object that handles all default RESTFul API actions"""
+
+
 from flask import abort, request, jsonify
 from api.v1.views import app
 from models import storage
