@@ -81,7 +81,8 @@ def create_review(place_id):
 def update_reveiw(review_id):
     """ updates a given review"""
     the_review = storage.get(Review, review_id)
-    ignore_keys_list = ["id", "created_at", "updated_at", "place_id", "user_id"]
+    ignore_keys_list = ["id", "created_at", "updated_at", "place_id",
+                        "user_id"]
     if the_review is None:
         abort(404)
     else:
